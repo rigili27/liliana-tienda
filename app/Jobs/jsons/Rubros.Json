@@ -1,0 +1,726 @@
+[
+    {
+        "Codrubro": "001001",
+        "Descripcion": "VARIOS"
+    },
+    {
+        "Codrubro": "002000",
+        "Descripcion": "RODAM Y RETENES"
+    },
+    {
+        "Codrubro": "002001",
+        "Descripcion": "RETENES"
+    },
+    {
+        "Codrubro": "002002",
+        "Descripcion": "RODAMIENTOS"
+    },
+    {
+        "Codrubro": "001007",
+        "Descripcion": "MECHAS MACHOS LIMAS"
+    },
+    {
+        "Codrubro": "001011",
+        "Descripcion": "ABRAZADERAS"
+    },
+    {
+        "Codrubro": "001000",
+        "Descripcion": "FERRETERIA"
+    },
+    {
+        "Codrubro": "005000",
+        "Descripcion": "REPUESTOS"
+    },
+    {
+        "Codrubro": "003000",
+        "Descripcion": "BAZAR"
+    },
+    {
+        "Codrubro": "001030",
+        "Descripcion": "GRIFERIAS"
+    },
+    {
+        "Codrubro": "020000",
+        "Descripcion": "MAQUINAGRO"
+    },
+    {
+        "Codrubro": "020001",
+        "Descripcion": "MAQUINAGRO"
+    },
+    {
+        "Codrubro": "008000",
+        "Descripcion": "ACEITES Y LUBRICANTES"
+    },
+    {
+        "Codrubro": "008001",
+        "Descripcion": "ACEITES"
+    },
+    {
+        "Codrubro": "009000",
+        "Descripcion": "009 PINTURAS"
+    },
+    {
+        "Codrubro": "001013",
+        "Descripcion": "VENENOS"
+    },
+    {
+        "Codrubro": "005002",
+        "Descripcion": "REPUESTOS HERRAMIENTAS"
+    },
+    {
+        "Codrubro": "001006",
+        "Descripcion": "JARDIN"
+    },
+    {
+        "Codrubro": "011000",
+        "Descripcion": "HERRAMIENTAS"
+    },
+    {
+        "Codrubro": "011005",
+        "Descripcion": "LLAVES COMB.FIJAS Y ESTR."
+    },
+    {
+        "Codrubro": "012000",
+        "Descripcion": "FILTROS"
+    },
+    {
+        "Codrubro": "012001",
+        "Descripcion": "FILTROS"
+    },
+    {
+        "Codrubro": "001012",
+        "Descripcion": "PEGAMENTOS"
+    },
+    {
+        "Codrubro": "001009",
+        "Descripcion": "ANAEROBICOS"
+    },
+    {
+        "Codrubro": "010000",
+        "Descripcion": "HIERROS"
+    },
+    {
+        "Codrubro": "010001",
+        "Descripcion": "HIERROS CHAPAS PERFILES TEJIDOS"
+    },
+    {
+        "Codrubro": "014000",
+        "Descripcion": "CAMARAS Y PARCHES SN"
+    },
+    {
+        "Codrubro": "014001",
+        "Descripcion": "CAMARAS Y PARCHES SN"
+    },
+    {
+        "Codrubro": "001020",
+        "Descripcion": "LIMPIEZA"
+    },
+    {
+        "Codrubro": "016000",
+        "Descripcion": "AMADAS-VALTRA-JD"
+    },
+    {
+        "Codrubro": "016001",
+        "Descripcion": "AMADAS"
+    },
+    {
+        "Codrubro": "007002",
+        "Descripcion": "BULONES DE RUEDA"
+    },
+    {
+        "Codrubro": "010002",
+        "Descripcion": "HIERROS MALLAS"
+    },
+    {
+        "Codrubro": "007000",
+        "Descripcion": " BULONERIA"
+    },
+    {
+        "Codrubro": "007001",
+        "Descripcion": "BULONES EN GRAL"
+    },
+    {
+        "Codrubro": "001014",
+        "Descripcion": "BOYEROS"
+    },
+    {
+        "Codrubro": "013001",
+        "Descripcion": "FUMIGACION ARAG"
+    },
+    {
+        "Codrubro": "013005",
+        "Descripcion": "FUMIGACION ACOPLES ADAPT ARAG"
+    },
+    {
+        "Codrubro": "004000",
+        "Descripcion": "ELECTRICIDAD/ILUMINACION"
+    },
+    {
+        "Codrubro": "001008",
+        "Descripcion": "VARIOS 2"
+    },
+    {
+        "Codrubro": "001016",
+        "Descripcion": "PPP/ GALV./EPOXI"
+    },
+    {
+        "Codrubro": "011021",
+        "Descripcion": "MOTORES/ BOMBAS/ELEVADORES"
+    },
+    {
+        "Codrubro": "002005",
+        "Descripcion": "CRUCETAS"
+    },
+    {
+        "Codrubro": "015002",
+        "Descripcion": "ROPA"
+    },
+    {
+        "Codrubro": "001010",
+        "Descripcion": "ABRASIVOS"
+    },
+    {
+        "Codrubro": "001023",
+        "Descripcion": "RESORTES Y CADENAS"
+    },
+    {
+        "Codrubro": "002004",
+        "Descripcion": "BOMBAS AGUA/ COMB/CARGADORES"
+    },
+    {
+        "Codrubro": "017002",
+        "Descripcion": "HIDRAULICOS TERMINALES"
+    },
+    {
+        "Codrubro": "017003",
+        "Descripcion": "HIDRAULICOS CILINDROS/MOT.BOMBAS"
+    },
+    {
+        "Codrubro": "017001",
+        "Descripcion": "HIDRAULICOS ACOPLES Y ADAPTADORES"
+    },
+    {
+        "Codrubro": "001017",
+        "Descripcion": "CONEXIONES"
+    },
+    {
+        "Codrubro": "025000",
+        "Descripcion": "CUBIERTAS NUEVAS"
+    },
+    {
+        "Codrubro": "025001",
+        "Descripcion": "CUBIETAS NUEVAS SN"
+    },
+    {
+        "Codrubro": "006000",
+        "Descripcion": "CORREAS"
+    },
+    {
+        "Codrubro": "006015",
+        "Descripcion": "CORREAS"
+    },
+    {
+        "Codrubro": "015001",
+        "Descripcion": "SEGURIDAD E HIGIENE"
+    },
+    {
+        "Codrubro": "015000",
+        "Descripcion": "ROPA Y SEGURIDAD"
+    },
+    {
+        "Codrubro": "016002",
+        "Descripcion": "J.DEERE"
+    },
+    {
+        "Codrubro": "008003",
+        "Descripcion": "LUBRICANTES"
+    },
+    {
+        "Codrubro": "017000",
+        "Descripcion": "HIDRAULICOS"
+    },
+    {
+        "Codrubro": "001015",
+        "Descripcion": "MANTENIMIENTO DE MOVILES"
+    },
+    {
+        "Codrubro": "016003",
+        "Descripcion": "030 VALTRA"
+    },
+    {
+        "Codrubro": "018001",
+        "Descripcion": "BISAGRAS Y PASADORES"
+    },
+    {
+        "Codrubro": "004001",
+        "Descripcion": "LINTERNAS"
+    },
+    {
+        "Codrubro": "005003",
+        "Descripcion": "REPUESTOS JARDIN"
+    },
+    {
+        "Codrubro": "007003",
+        "Descripcion": "bulones toenillo FIX-PARKER-CLAVOS"
+    },
+    {
+        "Codrubro": "001002",
+        "Descripcion": "ALBAÑILERIA"
+    },
+    {
+        "Codrubro": "011002",
+        "Descripcion": "CARRETILLAS PALAS PICOS RASTRILLOS"
+    },
+    {
+        "Codrubro": "011003",
+        "Descripcion": "HERRAMIENTAS INALAMBRICAS"
+    },
+    {
+        "Codrubro": "011004",
+        "Descripcion": "HIDROLAVADORAS"
+    },
+    {
+        "Codrubro": "017004",
+        "Descripcion": "HIDRAULICOS ORNG POLI ETC."
+    },
+    {
+        "Codrubro": "005001",
+        "Descripcion": "REPUESTOS AGRO"
+    },
+    {
+        "Codrubro": "004002",
+        "Descripcion": "ELECTRICIDAD E ILUMINACION"
+    },
+    {
+        "Codrubro": "011001",
+        "Descripcion": "HERRAMIENTAS DE MANO"
+    },
+    {
+        "Codrubro": "011006",
+        "Descripcion": "GENERADORES SOLDADORES BOMBAS"
+    },
+    {
+        "Codrubro": "013002",
+        "Descripcion": "FUMIGACION FILTROS BOQUILLAS ETC"
+    },
+    {
+        "Codrubro": "005004",
+        "Descripcion": "REPUESTOS PALIERES LLANTAS"
+    },
+    {
+        "Codrubro": "009001",
+        "Descripcion": "PINTURAS LATEX IMPREGNANTES"
+    },
+    {
+        "Codrubro": "009002",
+        "Descripcion": "PINTURAS SINTETICO ACRILICOS"
+    },
+    {
+        "Codrubro": "009003",
+        "Descripcion": "PINTURAS ACCESORIOS"
+    },
+    {
+        "Codrubro": "015003",
+        "Descripcion": "GUANTES"
+    },
+    {
+        "Codrubro": "003003",
+        "Descripcion": "BAZAR COCINA Y AIRE LIBRE"
+    },
+    {
+        "Codrubro": "005005",
+        "Descripcion": "REPUESTOS BOMBAS AMORTIGUADORES"
+    },
+    {
+        "Codrubro": "001024",
+        "Descripcion": "GRIFERIAS Y REP."
+    },
+    {
+        "Codrubro": "001022",
+        "Descripcion": "12V Y 24V"
+    },
+    {
+        "Codrubro": "010003",
+        "Descripcion": "HIERROS 20 PL.RH.TREF.ANG.ETC"
+    },
+    {
+        "Codrubro": "001018",
+        "Descripcion": "CAJAS HERRAMIENTAS"
+    },
+    {
+        "Codrubro": "005006",
+        "Descripcion": "TRANSMISIONES CARDANICAS"
+    },
+    {
+        "Codrubro": "005007",
+        "Descripcion": "LLANTAS RUEDAS CAM.PALIERES"
+    },
+    {
+        "Codrubro": "003002",
+        "Descripcion": "BAZAR AIRE LIBRE"
+    },
+    {
+        "Codrubro": "011007",
+        "Descripcion": "HERRAMIENTAS 12V Y TOMA FUERZA"
+    },
+    {
+        "Codrubro": "001003",
+        "Descripcion": "RUEDAS CUB Y CAMARAS"
+    },
+    {
+        "Codrubro": "005008",
+        "Descripcion": "AGRO ROLLOS FARDOS ETC"
+    },
+    {
+        "Codrubro": "011008",
+        "Descripcion": "HERRAMIENTAS 220V/380V"
+    },
+    {
+        "Codrubro": "015004",
+        "Descripcion": "SEGURIDAD RUTAS Y ALTURA"
+    },
+    {
+        "Codrubro": "045000",
+        "Descripcion": "ESTUFAS Y CALEFACTORES"
+    },
+    {
+        "Codrubro": "001019",
+        "Descripcion": "MEDICION ELEMENTOS"
+    },
+    {
+        "Codrubro": "002006",
+        "Descripcion": "BATERIAS Y PILAS"
+    },
+    {
+        "Codrubro": "005009",
+        "Descripcion": "REPUESTOS MANI"
+    },
+    {
+        "Codrubro": "003010",
+        "Descripcion": "LIBRERIA"
+    },
+    {
+        "Codrubro": "005010",
+        "Descripcion": "REPUESTOS COSECHADORA"
+    },
+    {
+        "Codrubro": "011010",
+        "Descripcion": "MOTOSIERRA MOTOGUADAÑAS cortacesped bord"
+    },
+    {
+        "Codrubro": "005011",
+        "Descripcion": "REPUESTOS VARIOS"
+    },
+    {
+        "Codrubro": "001004",
+        "Descripcion": "HERRERIA ARTISTICA"
+    },
+    {
+        "Codrubro": "005012",
+        "Descripcion": "rep POLEAS Y ENG.AGRO"
+    },
+    {
+        "Codrubro": "001026",
+        "Descripcion": "GOMERIA INSUMIOS"
+    },
+    {
+        "Codrubro": "001027",
+        "Descripcion": "INTRUMENTAL"
+    },
+    {
+        "Codrubro": "011016",
+        "Descripcion": "TUBOS BOCALLAVES Y PUNTAS"
+    },
+    {
+        "Codrubro": "013003",
+        "Descripcion": "PULVERIZACION PULVERIZADORES"
+    },
+    {
+        "Codrubro": "010004",
+        "Descripcion": "HIERROS TEJIDO ROMBO"
+    },
+    {
+        "Codrubro": "005013",
+        "Descripcion": "REPUESTOS VILLA"
+    },
+    {
+        "Codrubro": "013004",
+        "Descripcion": "FUMIGACION VARIOS"
+    },
+    {
+        "Codrubro": "007004",
+        "Descripcion": "bul.SEEGER arand.ETC"
+    },
+    {
+        "Codrubro": "001028",
+        "Descripcion": "MANGUERAS CAÑOS"
+    },
+    {
+        "Codrubro": "001029",
+        "Descripcion": "SOGAS precintos TELA PISOS"
+    },
+    {
+        "Codrubro": "005014",
+        "Descripcion": "REPUESTOS MOLINOS Y BEBIDAS"
+    },
+    {
+        "Codrubro": "005015",
+        "Descripcion": "CARBONES"
+    },
+    {
+        "Codrubro": "003004",
+        "Descripcion": "BAZAR REGALOS"
+    },
+    {
+        "Codrubro": "030001",
+        "Descripcion": "LMD"
+    },
+    {
+        "Codrubro": "011014",
+        "Descripcion": "HERRAM.CONSTRUC.AMOL/TALADROS/ATORN. ETC"
+    },
+    {
+        "Codrubro": "015005",
+        "Descripcion": "CALZADOS"
+    },
+    {
+        "Codrubro": "040001",
+        "Descripcion": "STIHL"
+    },
+    {
+        "Codrubro": "040002",
+        "Descripcion": "STHIL REPUESTOS STIHL"
+    },
+    {
+        "Codrubro": "040004",
+        "Descripcion": "BOBINAS BOLSAS BIG BAG"
+    },
+    {
+        "Codrubro": "010005",
+        "Descripcion": "HIERROS TEJIDO PAJARERO"
+    },
+    {
+        "Codrubro": "003009",
+        "Descripcion": "ELECTRONICA"
+    },
+    {
+        "Codrubro": "005016",
+        "Descripcion": "REPUESTOS AUTOMOTOR"
+    },
+    {
+        "Codrubro": "003006",
+        "Descripcion": "BAZAR LIMPIEZA"
+    },
+    {
+        "Codrubro": "003007",
+        "Descripcion": "BAZAR ELECTRODOMESTICOS"
+    },
+    {
+        "Codrubro": "003005",
+        "Descripcion": "BAZAR CAMPING/AIRE LIBRE"
+    },
+    {
+        "Codrubro": "008002",
+        "Descripcion": "ADITIVOS"
+    },
+    {
+        "Codrubro": "003011",
+        "Descripcion": "BAZAR CORTINERIA"
+    },
+    {
+        "Codrubro": "001036",
+        "Descripcion": "JARDIN Y PILETAS"
+    },
+    {
+        "Codrubro": "005017",
+        "Descripcion": "REPUESTOS SEMBRADORA"
+    },
+    {
+        "Codrubro": "015006",
+        "Descripcion": "SEGURIDAD PULVERIZACION"
+    },
+    {
+        "Codrubro": "001032",
+        "Descripcion": "TANQUES Y RECIPIENTES"
+    },
+    {
+        "Codrubro": "016004",
+        "Descripcion": "MATERMACC"
+    },
+    {
+        "Codrubro": "013020",
+        "Descripcion": "FUMIGACION TEEJET"
+    },
+    {
+        "Codrubro": "013021",
+        "Descripcion": "FUMIGACION KADAE"
+    },
+    {
+        "Codrubro": "015007",
+        "Descripcion": "SEGURIDAD TENSORES Y GANCHOS"
+    },
+    {
+        "Codrubro": "001033",
+        "Descripcion": "CONSTRUCCION"
+    },
+    {
+        "Codrubro": "001034",
+        "Descripcion": "TEXTIL TELAS LONAS FILM M SOMRA"
+    },
+    {
+        "Codrubro": "015008",
+        "Descripcion": "ROPA P/LLUVIA"
+    },
+    {
+        "Codrubro": "005024",
+        "Descripcion": "REPUESTOS CALEFONES COCINAS ETX"
+    },
+    {
+        "Codrubro": "018003",
+        "Descripcion": "CERRADURAS Y CANDADOS"
+    },
+    {
+        "Codrubro": "001037",
+        "Descripcion": "CADENAS NUDO CABLES ACERO TENSORES"
+    },
+    {
+        "Codrubro": "011009",
+        "Descripcion": "DESTORNILLADORES Y PUNTAS"
+    },
+    {
+        "Codrubro": "011011",
+        "Descripcion": "HERRAMIENTAS AIRE"
+    },
+    {
+        "Codrubro": "001038",
+        "Descripcion": "TENSORES GANCHOS ETC"
+    },
+    {
+        "Codrubro": "010006",
+        "Descripcion": "HIERROS NETO"
+    },
+    {
+        "Codrubro": "003008",
+        "Descripcion": "BAZAR VARIOS"
+    },
+    {
+        "Codrubro": "001040",
+        "Descripcion": "SOLAR ENERGIA Y ACCESORIOS"
+    },
+    {
+        "Codrubro": "011013",
+        "Descripcion": "HERRAMIENTAS TALLER Y CAMPO"
+    },
+    {
+        "Codrubro": "001050",
+        "Descripcion": "TRABAJADORES"
+    },
+    {
+        "Codrubro": "011018",
+        "Descripcion": "HERRAMIENTAS EXPLOSION"
+    },
+    {
+        "Codrubro": "007005",
+        "Descripcion": "CHAVETAS"
+    },
+    {
+        "Codrubro": "045002",
+        "Descripcion": "ESTUFAS ACCESORIOS"
+    },
+    {
+        "Codrubro": "045001",
+        "Descripcion": "ESTUFAS CALEF CALEFONES"
+    },
+    {
+        "Codrubro": "041001",
+        "Descripcion": "IMPORTACION VARIOS"
+    },
+    {
+        "Codrubro": "011020",
+        "Descripcion": "GENERADORES HIROLAVADORAS ASPIRADORAS"
+    },
+    {
+        "Codrubro": "011012",
+        "Descripcion": "COMPRESORES"
+    },
+    {
+        "Codrubro": "004003",
+        "Descripcion": "electricidad E ILUMINACION ACCESORIOS"
+    },
+    {
+        "Codrubro": "002003",
+        "Descripcion": "TENSORES"
+    },
+    {
+        "Codrubro": "005018",
+        "Descripcion": "REPUESTOS HERRAM DE MANO"
+    },
+    {
+        "Codrubro": "021000",
+        "Descripcion": "PROYECTO HOSPEDAR"
+    },
+    {
+        "Codrubro": "021001",
+        "Descripcion": "PROTECTO HOSPEDAR"
+    },
+    {
+        "Codrubro": "017005",
+        "Descripcion": "HIDRAULICOS MANGUERAS"
+    },
+    {
+        "Codrubro": "003001",
+        "Descripcion": "BAZAR BAÑOS"
+    },
+    {
+        "Codrubro": "040000",
+        "Descripcion": "STIHL"
+    },
+    {
+        "Codrubro": "018000",
+        "Descripcion": "HERRAJES Y CORTINERIA"
+    },
+    {
+        "Codrubro": "013000",
+        "Descripcion": "FUMIGACION PULVERIZACION"
+    },
+    {
+        "Codrubro": "041000",
+        "Descripcion": "importacion"
+    },
+    {
+        "Codrubro": "030000",
+        "Descripcion": "lmd"
+    },
+    {
+        "Codrubro": "018002",
+        "Descripcion": "ESTANTES MANIJAS Y TIRADORES"
+    },
+    {
+        "Codrubro": "050001",
+        "Descripcion": "PAGOS Y COBROS"
+    },
+    {
+        "Codrubro": "018004",
+        "Descripcion": "CARTELES"
+    },
+    {
+        "Codrubro": "005019",
+        "Descripcion": "rep CADENAS A ROD"
+    },
+    {
+        "Codrubro": "006003",
+        "Descripcion": "CORREAS A B C DAYCO"
+    },
+    {
+        "Codrubro": "006001",
+        "Descripcion": "CORREAS KEVLAR"
+    },
+    {
+        "Codrubro": "013006",
+        "Descripcion": "FUMIGACION  ACOPLES ADAPT ECO"
+    },
+    {
+        "Codrubro": "005025",
+        "Descripcion": "AGRO DISCOS Y CUCHILLAS"
+    }
+]
