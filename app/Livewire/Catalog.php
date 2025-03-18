@@ -2,60 +2,48 @@
 
 namespace App\Livewire;
 
-use App\Http\Livewire\Cart;
-use App\Models\Business;
 use App\Models\Category;
 use App\Models\Family;
 use App\Models\Product;
 use App\Services\SearchService;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Log;
-use Livewire\Attributes\Lazy;
 use Livewire\Component;
-use Livewire\Livewire;
 use Livewire\WithPagination;
-
-use ProtoneMedia\LaravelCrossEloquentSearch\Search;
-
 
 class Catalog extends Component
 {
-    use WithPagination;
 
-    public $business;
+    use WithPagination;
 
     private $products;
 
     public $families, $categories;
 
-    public $b, $temp_b; // para buscar
-
     public $order, $family, $category; // Para filtros de busqueda
 
-    public $list_products;
+    public $b, $temp_b; // para buscar
+    protected $queryString = ['b']; // Persistir búsqueda y orden en la URL
 
-    protected $queryString = ['b', 'order', 'family', 'category']; // Persistir búsqueda y orden en la URL
-
-    public function mount(){
-
-        $this->business = Business::first();
-
+    public function mount()
+    {
         $this->order = Cache::get('product_order', null);
         $this->family = Cache::get('family_filter', null);
         $this->category = Cache::get('category_filter', null);
 
         $this->families = Family::getFamilies();
         $this->categories = Category::getCategories();
-        
-        
-        // para la barra de search
-        $this->list_products = Product::all();
+
         $this->temp_b = '';
     }
 
-    public function btnSearchEnter(){
-        Cache::put('temp_b', $this->temp_b);
-        return redirect()->route('catalog', ['b' => $this->temp_b]);
+    public function render(SearchService $searchService)
+    {
+        // $this->products = Product::paginate(15);
+        $this->buscar($searchService);
+
+        return view('livewire.catalog', [
+            'products' => $this->products,
+        ]);
     }
 
     public function buscar(SearchService $searchService)
@@ -68,14 +56,10 @@ class Catalog extends Component
         $this->products = $searchService->searchProducts($filters, $this->b, $this->order);
     }
 
-    public function render(SearchService $searchService)
+    public function btnSearchEnter()
     {
-
-        $this->buscar($searchService);
-
-        return view('livewire.catalog', [
-            'products' => $this->products,
-        ]);
+        Cache::put('temp_b', $this->temp_b, 10);
+        return redirect()->route('catalog', ['b' => $this->temp_b]);
     }
 
     public function changeOrder($order)
@@ -89,13 +73,6 @@ class Catalog extends Component
     {
         $this->family = $id;
         Cache::put('family_filter', $this->family, 60);
-        $this->resetPage();
-    }
-
-    public function changeFilterCategory($id)
-    {
-        $this->category = $id;
-        Cache::put('category_filter', $this->category, 60);
         $this->resetPage();
     }
 
@@ -115,5 +92,19 @@ class Catalog extends Component
         $this->dispatch('addToCart', productId: $product, quantity: $quantity)->to(\App\Livewire\Cart::class);
     }
 
+    
+    // para que wire loading funcione correctamente
+    
+    public $isPaginating = false;
 
+    public function updatedTempB()
+    {
+        $this->isPaginating = false; // Cuando se busca, no queremos mostrar el loader
+        $this->btnSearchEnter();
+    }
+
+    public function pagination()
+    {
+        $this->isPaginating = true; // Cuando se pagina, activamos el loader
+    }
 }
