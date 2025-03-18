@@ -3,7 +3,7 @@
     <div class="bg-white shadow-md dark:bg-neutral-800">
         <div class="container mx-auto flex items-center justify-between py-4 px-6">
             <img class="inline-block .size-8 " src="/assets/images/logo.png" alt="La 27 ferretería">
-            <p>{{ $business->name }}</p>
+            {{-- <p>{{ $business->name }}</p> --}}
             <div class="relative .w-full .max-w-lg w-[60%]">
                 <div id="hs-combobox-basic-usage" class="relative" data-hs-combo-box="">
                     <div class="relative">
@@ -12,13 +12,13 @@
                     </div>
                     <div class="absolute z-50 w-full max-h-72 p-1 bg-white border border-gray-200 rounded-lg overflow-hidden overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500 dark:bg-neutral-900 dark:border-neutral-700" style="display: none;" data-hs-combo-box-output="">
 
-                        @foreach ($products as $item)
+                        {{-- @foreach ($products as $item)
                             <a href="{{ route('show-product', $item->id) }}" class="cursor-pointer py-2 px-4 w-full text-sm text-gray-800 hover:bg-gray-100 rounded-lg focus:outline-none focus:bg-gray-100 dark:bg-neutral-900 dark:hover:bg-neutral-800 dark:text-neutral-200 dark:focus:bg-neutral-800" tabindex="0" data-hs-combo-box-output-item="">
                                 <div class="flex justify-between items-center w-full">
                                     <span data-hs-combo-box-search-text="{{ $item->name }}" data-hs-combo-box-value="">{{ $item->name }}</span>
                                 </div>
                             </a>
-                        @endforeach
+                        @endforeach --}}
 
                     </div>
                 </div>
@@ -70,12 +70,7 @@
                     <div class="mt-1 text-lg text-yellow-700">
                         Nuestra página se encuenta en remodelación. Cualquier información o movimiento que se plasme son exclusivamente de pruebas internas, y no son reales.
                     </div>
-                    <div class="mt-1 text-lg text-yellow-700">
-                        usuario: usuario@gmail.com
-                    </div>
-                    <div class="mt-1 text-lg text-yellow-700">
-                        contraseña: 123456
-                    </div>
+                    
                 </div>
             </div>
         </div>
