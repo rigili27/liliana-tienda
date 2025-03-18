@@ -19,7 +19,21 @@ class HeroResource extends Resource
 {
     protected static ?string $model = Hero::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-photo';
+
+    protected static ?string $navigationGroup = 'Empresa';
+    protected static ?string $label = 'Banners';
+
+    // Badges para info
+    public static function getNavigationBadge(): ?string
+    {
+        return 'En construcción';
+    }
+    public static function getNavigationBadgeColor(): ?string
+    {
+        return 'danger';
+    }
+    // Badges para info
 
     public static function canAccess(): bool
     {
@@ -39,9 +53,9 @@ class HeroResource extends Resource
                     ->imageEditorAspectRatios([
                         null,
                         '16:9',
-                    ])      
+                    ])
                     ->getUploadedFileNameForStorageUsing(
-                        fn (TemporaryUploadedFile $file): string => (string) str($file->getClientOriginalName())
+                        fn(TemporaryUploadedFile $file): string => (string) str($file->getClientOriginalName())
                             ->prepend('heros/hero-'  . Carbon::now()->format('YmdHis') . '-'),
                     ),
             ]);

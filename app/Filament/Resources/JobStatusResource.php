@@ -31,7 +31,21 @@ class JobStatusResource extends Resource
 {
     protected static ?string $model = JobStatus::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-command-line';
+
+    protected static ?string $navigationGroup = 'Desarrolladores';
+    protected static ?string $label = 'Trabajos';
+
+    // Badges para info
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::where('status', 'in_progress')->count();
+    }
+    public static function getNavigationBadgeColor(): ?string
+    {
+        return 'info';
+    }
+    // Badges para info
 
     public static function canAccess(): bool
     {

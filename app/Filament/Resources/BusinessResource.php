@@ -19,7 +19,10 @@ class BusinessResource extends Resource
 {
     protected static ?string $model = Business::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-building-office';
+
+    protected static ?string $navigationGroup = 'Empresa';
+    protected static ?string $label = 'La Empresa';
 
     public static function canAccess(): bool
     {
@@ -66,10 +69,13 @@ class BusinessResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
+                    ->label('Nombre')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('desktop_logo_url')
+                    ->label('Logo tamaño PC')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('mobile_logo_url')
+                    ->label('Logo tamaño Móvil')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()

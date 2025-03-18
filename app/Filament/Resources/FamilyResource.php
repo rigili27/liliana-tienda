@@ -17,7 +17,12 @@ class FamilyResource extends Resource
 {
     protected static ?string $model = Family::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-c-queue-list';
+
+    protected static ?string $navigationGroup = 'Productos';
+    protected static ?string $label = 'Rubros';
+
+    protected static ?int $navigationSort = 2;
 
     public static function canAccess(): bool
     {
@@ -44,11 +49,15 @@ class FamilyResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('id')
+                    ->label('Código')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('name')
+                    ->label('Nombre')
                     ->searchable(),
-                Tables\Columns\ImageColumn::make('image_url'),
+                Tables\Columns\ImageColumn::make('image_url')
+                    ->label('Imágen'),
                 Tables\Columns\TextColumn::make('position')
+                    ->label('Posición')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')

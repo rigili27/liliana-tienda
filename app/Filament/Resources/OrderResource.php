@@ -27,7 +27,8 @@ class OrderResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-clipboard-document-list';
 
-    protected static ?string $navigationLabel = 'Mis facturas';
+    protected static ?string $navigationGroup = 'Compras';
+    protected static ?string $label = 'Mis Facturas';
 
     public static function form(Form $form): Form
     {

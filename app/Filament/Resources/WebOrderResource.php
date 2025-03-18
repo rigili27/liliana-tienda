@@ -21,7 +21,21 @@ class WebOrderResource extends Resource
 {
     protected static ?string $model = WebOrder::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-shopping-bag';
+
+    protected static ?string $navigationGroup = 'Compras';
+    protected static ?string $label = 'Mis Compras';
+
+    // Badges para info
+    public static function getNavigationBadge(): ?string
+    {
+        return 'En construcción';
+    }
+    public static function getNavigationBadgeColor(): ?string
+    {
+        return 'danger';
+    }
+    // Badges para info
 
     public static function canAccess(): bool
     {

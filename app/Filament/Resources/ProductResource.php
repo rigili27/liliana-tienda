@@ -23,7 +23,12 @@ class ProductResource extends Resource
 {
     protected static ?string $model = Product::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-squares-2x2';
+
+    protected static ?string $navigationGroup = 'Productos';
+    protected static ?string $label = 'Productos';
+
+    protected static ?int $navigationSort = 1;
 
     public static function canAccess(): bool
     {
@@ -91,27 +96,37 @@ class ProductResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('id'),
+                Tables\Columns\TextColumn::make('id')
+                    ->label('Código'),
                 Tables\Columns\TextColumn::make('sku')
+                    ->label('Código de Origen - SKU')
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('family.name')
+                    ->searchable()
+                    ->label('Rubro')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('category.name')
+                    ->label('Sub Rubro')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('name')
+                    ->label('Nombre')
                     ->sortable()
                     ->searchable(),
-                Tables\Columns\ImageColumn::make('image_url'),
+                Tables\Columns\ImageColumn::make('image_url')
+                    ->label('Imágen'),
                 Tables\Columns\TextColumn::make('price_1')
+                    ->label('Precio Público 1')
                     ->numeric(locale: 'nl')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('price_2')
+                    ->label('Precio Público 2')
                     ->numeric(locale: 'nl')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('price_3')
+                    ->label('Precio Público 3')
                     ->numeric(locale: 'nl')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
