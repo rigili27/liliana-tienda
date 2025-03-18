@@ -111,6 +111,7 @@ class ProductCreateHandlerJob implements ShouldQueue
             // 'fupcosto' => '',
             // 'Alicuota' => '',
             'Codigobarra' => 'bar_code',
+            'Codorigen' => 'sku',
         ];
 
         $mappedData = [];
