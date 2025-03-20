@@ -5,10 +5,13 @@ use Illuminate\Http\Request;
 use Rupadana\ApiService\Http\Handlers;
 use Spatie\QueryBuilder\QueryBuilder;
 use App\Filament\Resources\FamilyResource;
+use App\Models\Family;
 
 class PaginationHandler extends Handlers {
     public static string | null $uri = '/';
     public static string | null $resource = FamilyResource::class;
+
+    public static bool $public = true;
 
 
     public function handler()
