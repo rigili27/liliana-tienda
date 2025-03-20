@@ -29,7 +29,10 @@ class UpdateHandler extends Handlers {
 
         if (!$model) return static::sendNotFoundResponse();
 
-        $model->fill($request->all());
+        $rawData = file_get_contents('php://input');
+        $products = json_decode($rawData, true);
+
+        $model->fill($products);
 
         $model->save();
 
