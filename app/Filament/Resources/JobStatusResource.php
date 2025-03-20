@@ -49,7 +49,7 @@ class JobStatusResource extends Resource
 
     public static function canAccess(): bool
     {
-        return auth()->user()->hasRole('admin');
+        return auth()->user()->hasRole('admin|developer');
     }
 
     public static function form(Form $form): Form
