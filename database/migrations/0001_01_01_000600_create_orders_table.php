@@ -106,6 +106,8 @@ return new class extends Migration
             $table->string('idrecvalores')->nullable();
             $table->longText('attach')->nullable();
             $table->timestamps();
+
+            $table->index('nrocuit');
         });
     }
 
