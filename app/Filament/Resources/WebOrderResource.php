@@ -24,7 +24,7 @@ class WebOrderResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-shopping-bag';
 
     protected static ?string $navigationGroup = 'Compras';
-    protected static ?string $label = 'Mis Compras';
+    protected static ?string $label = 'Mis Compras Web';
 
     // Badges para info
     public static function getNavigationBadge(): ?string
