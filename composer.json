@@ -11,6 +11,7 @@
         "laravel/framework": "^11.31",
         "laravel/scout": "^10.13",
         "laravel/tinker": "^2.9",
+        "league/flysystem-aws-s3-v3": "^3.29",
         "livewire/livewire": "^3.5",
         "novadaemon/filament-pretty-json": "^2.3",
         "rupadana/filament-api-service": "^3.4"
