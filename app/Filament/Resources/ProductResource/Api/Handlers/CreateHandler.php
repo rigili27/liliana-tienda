@@ -26,14 +26,14 @@ class CreateHandler extends Handlers {
         $rawData = file_get_contents('php://input');
         
         // Comentar esta linea para produccion
-        $productData = json_decode($rawData, true);
+        // $productData = json_decode($rawData, true);
 
         // Comentar esta linea en dev
-        //$decodedData = base64_decode(json_decode($rawData, true)['data']);
+        $decodedData = base64_decode(json_decode($rawData, true)['data']);
 
         // Comentar esta linea en dev
         // Convertir a array PHP
-        //$productData = json_decode($decodedData, true);
+        $productData = json_decode($decodedData, true);
 
         Log::info('Decoded JSON received', ['data' => $productData]);
 
