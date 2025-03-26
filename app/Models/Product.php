@@ -173,21 +173,21 @@ class Product extends Model
 
     public static function choosePriceToUserPriceList(Product $product){
 
-        if(!Auth::user()){
-            return $product->price_1;
-        }
+        //if(!Auth::user()){
+        //    return $product->price_1;
+        //}
 
-        if(Auth::user()->price_list == 1){
-            return $product->price_1;
-        }
-        if(Auth::user()->price_list == 2){
-            return $product->price_2;
-        }
-        if(Auth::user()->price_list == 3){
-            return $product->price_3;
-        }
+        //if(Auth::user()->price_list == 1){
+        //    return $product->price_1;
+        //}
+        //if(Auth::user()->price_list == 2){
+        //    return $product->price_2;
+        //}
+        //if(Auth::user()->price_list == 3){
+        //    return $product->price_3;
+        //}
 
-        return $product->price_1;
+        return $product->price_2;
     }
 
 
