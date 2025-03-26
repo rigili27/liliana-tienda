@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Family;
 use App\Models\Product;
 use ProtoneMedia\LaravelCrossEloquentSearch\Search;
 use Illuminate\Support\Facades\DB;
@@ -153,18 +154,23 @@ class SearchService
             $productsQuery->where('category_id', $filters['category']);
         }
 
-        // Si no hay término de búsqueda, aplicar orden directamente y devolver paginación
-        if (is_null($searchTerm) || trim($searchTerm) === '') {
-            if ($order === 'asc') {
-                $productsQuery->orderBy('price_1', 'asc');
-            } elseif ($order === 'desc') {
-                $productsQuery->orderBy('price_1', 'desc');
-            } elseif ($order === 'name') {
-                $productsQuery->orderBy('name', 'asc');
-            }
-
-            return $productsQuery->paginate(10);
+        // Si no hay término de búsqueda, aplicar orden por defecto o el especificado
+    if (is_null($searchTerm) || trim($searchTerm) === '') {
+        if ($order === 'asc') {
+            $productsQuery->orderBy('price_1', 'asc');
+        } elseif ($order === 'desc') {
+            $productsQuery->orderBy('price_1', 'desc');
+        } elseif ($order === 'name') {
+            $productsQuery->orderBy('name', 'asc');
+        } else {
+            // Orden por defecto: Family->name y luego Product->name
+            $productsQuery->orderBy(
+                Family::select('name')->whereColumn('families.id', 'products.family_id')
+            )->orderBy('name', 'asc');
         }
+
+        return $productsQuery->paginate(10);
+    }
 
         // Obtener todos los productos
         $products = $productsQuery->get();
