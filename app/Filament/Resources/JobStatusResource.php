@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\JobStatusResource\Pages;
 use App\Filament\Resources\JobStatusResource\RelationManagers;
+use App\Filament\Resources\JobStatusResource\Widgets\RefreshBusinessesWidget;
 use App\Jobs\FamilyCreateHandlerJob;
 use App\Jobs\OrderCreateHandlerJob;
 use App\Jobs\ProductCreateHandlerJob;
@@ -52,6 +53,7 @@ class JobStatusResource extends Resource
         return auth()->user()->hasRole('admin|developer');
     }
 
+
     public static function form(Form $form): Form
     {
         return $form
@@ -91,13 +93,13 @@ class JobStatusResource extends Resource
                 Tables\Columns\TextColumn::make('job_name')
                     ->searchable(),
                 IconColumn::make('status')
-                    ->icon(fn (string $state): string => match ($state) {
+                    ->icon(fn(string $state): string => match ($state) {
                         'pending' => 'heroicon-o-clock',
                         'in_progress' => 'heroicon-o-play-circle',
                         'completed' => 'heroicon-o-check-circle',
                         'failed' => 'heroicon-o-exclamation-triangle',
                     })
-                    ->color(fn (string $state): string => match ($state) {
+                    ->color(fn(string $state): string => match ($state) {
                         'pending' => 'info',
                         'in_progress' => 'warning',
                         'completed' => 'success',
@@ -136,7 +138,7 @@ class JobStatusResource extends Resource
                             }
 
                             Artisan::call('queue:work --stop-when-empty');
-                            
+
                             // Reprogramar el Job
                             if ($record->job_name == 'ProductCreateHandlerJob')
                                 ProductCreateHandlerJob::dispatch($payload, $record->id);
@@ -157,7 +159,7 @@ class JobStatusResource extends Resource
                         }
                     }),
             ])
-            
+
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
