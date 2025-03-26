@@ -43,6 +43,10 @@
                         @endif
                     @endif
 
+                    <div class="mt-3">
+                        <p class="text-gray-500 text-sm dark:text-neutral-400">Actualizado el {{ $product->updated_at?->format('d/m/Y \a \l\a\s H:i') }}hs.</p>
+                    </div>
+
                 </div>
             </div>
         </div>
