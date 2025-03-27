@@ -18,12 +18,15 @@
                     <h3 class="text-sm font-bold text-blue-800 dark:text-white">
                         <span>{{ $product->family->name }}</span><span class="mx-2">-</span><span>{{ $product->category->name }}</span>
                     </h3>
-                    <p class="mt-3 text-lg text-gray-500 dark:text-neutral-400">SKU: {{ $product->sku }}</p>
+                    <p class="mt-3 text-lg text-gray-500 dark:text-neutral-400">Código interno: {{  $product->id }} | SKU: {{ $product->sku }}</p>
 
                     <h1 class="block text-3xl font-bold text-gray-800 lg:leading-tight dark:text-white">{{ $product->name }}</h1>
 
                     <div class="flex gap-8 mt-5">
-                        <p class="text-3xl font-semibold text-gray-500 dark:text-neutral-500">$ {{ $product->choosePriceToUserPriceList($product) }}</p>
+                        <p class="text-3xl font-semibold text-gray-500 dark:text-neutral-500">
+                            {{-- $ {{ $product->choosePriceToUserPriceList($product) }} --}}
+                            $ {{ number_format(round($product->choosePriceToUserPriceList($product)), 0, ',', '.') }}
+                        </p>
                         <p class="border-r border-gray-400"></p>
                         <x-badge class="{{ $product->stock < 1 ? 'bg-red-100 text-red-800 dark:bg-red-800/30 dark:text-red-500' : 'bg-blue-100 text-blue-800 dark:bg-blue-800/30 dark:text-blue-500' }}">
                             {{ $product->stock < 1 ? 'sin stock' : 'stock: ' . $product->stock . ' u.' }}
