@@ -142,19 +142,19 @@ class SearchService
     
     // funcion son soundlike funciona correnctamente
     public function searchProducts($filters, $searchTerm = null, $order = null)
-    {
-        $productsQuery = Product::query()->with(['family', 'category']);
+{
+    $productsQuery = Product::query()->with(['family', 'category']);
 
-        // Aplicar filtros si están presentes
-        if (!empty($filters['family'])) {
-            $productsQuery->where('family_id', $filters['family']);
-        }
+    // Aplicar filtros si están presentes
+    if (!empty($filters['family'])) {
+        $productsQuery->where('family_id', $filters['family']);
+    }
 
-        if (!empty($filters['category'])) {
-            $productsQuery->where('category_id', $filters['category']);
-        }
+    if (!empty($filters['category'])) {
+        $productsQuery->where('category_id', $filters['category']);
+    }
 
-        // Si no hay término de búsqueda, aplicar orden por defecto o el especificado
+    // Si no hay término de búsqueda, aplicar orden por defecto o el especificado
     if (is_null($searchTerm) || trim($searchTerm) === '') {
         if ($order === 'asc') {
             $productsQuery->orderBy('price_1', 'asc');
@@ -172,61 +172,63 @@ class SearchService
         return $productsQuery->paginate(10);
     }
 
-        // Obtener todos los productos
-        $products = $productsQuery->get();
+    // Obtener todos los productos
+    $products = $productsQuery->get();
 
-        // Coincidencias exactas en name o sku
-        $exactMatches = $products->filter(function ($product) use ($searchTerm) {
-            return stripos($product->name, $searchTerm) !== false || stripos($product->sku, $searchTerm) !== false;
+    // Coincidencias exactas en id, name o sku
+    $exactMatches = $products->filter(function ($product) use ($searchTerm) {
+        return stripos($product->name, $searchTerm) !== false ||
+               stripos($product->sku, $searchTerm) !== false ||
+               (is_numeric($searchTerm) && $product->id == $searchTerm);
+    });
+
+    // Si hay coincidencias exactas, devolver solo esas
+    if ($exactMatches->isNotEmpty()) {
+        $sortedExactMatches = $exactMatches->sortBy(function ($product) use ($searchTerm) {
+            $namePosition = stripos($product->name, $searchTerm);
+            $skuPosition = stripos($product->sku, $searchTerm);
+            $idMatch = (is_numeric($searchTerm) && $product->id == $searchTerm) ? 0 : PHP_INT_MAX;
+
+            // Priorizar `id`, luego `name`, luego `sku`
+            return min($idMatch, $namePosition !== false ? $namePosition : PHP_INT_MAX, $skuPosition !== false ? $skuPosition : PHP_INT_MAX);
         });
 
-        // Si hay coincidencias exactas, devolver solo esas
-        if ($exactMatches->isNotEmpty()) {
-            $sortedExactMatches = $exactMatches->sortBy(function ($product) use ($searchTerm) {
-                $namePosition = stripos($product->name, $searchTerm);
-                $skuPosition = stripos($product->sku, $searchTerm);
-
-                // Priorizar `name`, pero incluir `sku` como criterio
-                return min($namePosition !== false ? $namePosition : PHP_INT_MAX, $skuPosition !== false ? $skuPosition : PHP_INT_MAX);
-            });
-
-            return $this->paginateCollection($sortedExactMatches, 10);
-        }
-
-        // Coincidencias similares (Levenshtein) en name o sku
-        $similarMatches = $products->map(function ($product) use ($searchTerm) {
-            $nameSimilarity = similar_text(mb_strtolower($searchTerm), mb_strtolower($product->name), $namePercentMatch);
-            $skuSimilarity = similar_text(mb_strtolower($searchTerm), mb_strtolower($product->sku), $skuPercentMatch);
-
-            return [
-                'product' => $product,
-                'nameSimilarity' => $nameSimilarity,
-                'skuSimilarity' => $skuSimilarity,
-                'maxSimilarity' => max($nameSimilarity, $skuSimilarity), // Comparar similitud máxima entre ambos campos
-            ];
-        })->filter(function ($item) {
-            return $item['maxSimilarity'] > 6; // Ajustar umbral según necesidad
-        });
-
-        // Ordenar por similitud y devolver
-        if ($similarMatches->isNotEmpty()) {
-            $sortedSimilarMatches = $similarMatches->sortByDesc('maxSimilarity')->pluck('product');
-
-            // Aplicar orden adicional si corresponde
-            if ($order === 'asc') {
-                $sortedSimilarMatches = $sortedSimilarMatches->sortBy('price_1');
-            } elseif ($order === 'desc') {
-                $sortedSimilarMatches = $sortedSimilarMatches->sortByDesc('price_1');
-            } elseif ($order === 'name') {
-                $sortedSimilarMatches = $sortedSimilarMatches->sortBy('name');
-            }
-
-            return $this->paginateCollection($sortedSimilarMatches, 10);
-        }
-
-        // Si no hay resultados similares, devolver lista vacía
-        return $this->paginateCollection(collect([]), 10);
+        return $this->paginateCollection($sortedExactMatches, 10);
     }
+
+    // Coincidencias similares en name o sku (id solo se busca exacto, no es relevante aquí)
+    $similarMatches = $products->map(function ($product) use ($searchTerm) {
+        $nameSimilarity = similar_text(mb_strtolower($searchTerm), mb_strtolower($product->name), $namePercentMatch);
+        $skuSimilarity = similar_text(mb_strtolower($searchTerm), mb_strtolower($product->sku), $skuPercentMatch);
+
+        return [
+            'product' => $product,
+            'nameSimilarity' => $nameSimilarity,
+            'skuSimilarity' => $skuSimilarity,
+            'maxSimilarity' => max($nameSimilarity, $skuSimilarity),
+        ];
+    })->filter(function ($item) {
+        return $item['maxSimilarity'] > 6;
+    });
+
+    // Ordenar por similitud y devolver
+    if ($similarMatches->isNotEmpty()) {
+        $sortedSimilarMatches = $similarMatches->sortByDesc('maxSimilarity')->pluck('product');
+
+        if ($order === 'asc') {
+            $sortedSimilarMatches = $sortedSimilarMatches->sortBy('price_1');
+        } elseif ($order === 'desc') {
+            $sortedSimilarMatches = $sortedSimilarMatches->sortByDesc('price_1');
+        } elseif ($order === 'name') {
+            $sortedSimilarMatches = $sortedSimilarMatches->sortBy('name');
+        }
+
+        return $this->paginateCollection($sortedSimilarMatches, 10);
+    }
+
+    return $this->paginateCollection(collect([]), 10);
+}
+
 
     
     /**
