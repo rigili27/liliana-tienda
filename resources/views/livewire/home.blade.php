@@ -1,5 +1,6 @@
 <div>
-    <h3>hola</h3>
+
+    <x-navbar  />
 
     <x-home.slider-hero :heros="$heros" />
 
