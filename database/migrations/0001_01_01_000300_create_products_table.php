@@ -35,6 +35,7 @@ return new class extends Migration
             $table->string('sku')->nullable();
             $table->string('bar_code')->nullable();
             $table->integer('position')->default(0);
+            $table->softDeletes();
             $table->timestamps();
         });
     }
