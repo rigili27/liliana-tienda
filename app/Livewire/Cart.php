@@ -34,7 +34,7 @@ class Cart extends Component
             $this->cart[$productId] = [
                 'id' => $product->id,
                 'name' => $product->name,
-                'price' => $product->price_1,
+                'price' => $product->choosePriceToUserPriceList($product),
                 'quantity' => $quantity,
             ];
         }
@@ -42,7 +42,7 @@ class Cart extends Component
         session()->put('cart', $this->cart); // Guarda en la sesión
 
         Notification::make()
-            ->title('Saved successfully')
+            ->title('Artículo agregado al carrito')
             ->icon('heroicon-o-document-text')
             ->iconColor('success')
             ->send();
