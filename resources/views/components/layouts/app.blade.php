@@ -36,7 +36,7 @@
             {{ $slot }}
         </main>
 
-        {{-- @livewire('notifications') --}}
+        @livewire('notifications')
         @filamentScripts
         @livewireScripts
         <script src="./node_modules/preline/dist/preline.js"></script>
