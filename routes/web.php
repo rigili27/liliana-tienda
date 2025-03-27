@@ -27,9 +27,15 @@ Route::get('/link', function(Request $request){
     echo "link ok";
 });
 
+Route::get('/key', function(Request $request){
+    Artisan::call('key:generate');
+    echo "key ok";
+});
+
 Route::get('/cache', function(Request $request){
     Artisan::call('config:clear');
     Artisan::call('cache:clear');
+    Artisan::call('optimize:clear');
     Artisan::call('route:clear');
     Artisan::call('view:clear');
     Artisan::call('permission:cache-reset');
