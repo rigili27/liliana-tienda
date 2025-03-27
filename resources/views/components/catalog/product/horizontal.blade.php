@@ -1,11 +1,11 @@
 <a href="{{ route('show-product', $product->id) }}">
-    <div {{ $attributes->merge(['class' => 'bg-white border rounded-xl shadow-sm sm:flex dark:bg-neutral-900 dark:border-neutral-700 dark:shadow-neutral-700/70']) }}>
-        <div class="shrink-0 relative w-full rounded-t-xl overflow-hidden min-h-72 .pt-[20%] sm:rounded-s-xl sm:max-w-60 md:rounded-se-none md:max-w-xs">
+    <div {{ $attributes->merge(['class' => 'bg-white border rounded-xl shadow-sm flex .sm:flex dark:bg-neutral-900 dark:border-neutral-700 dark:shadow-neutral-700/70']) }}>
+        <div class="shrink-0 relative w-full rounded-t-xl overflow-hidden min-h-72 sm:rounded-s-xl max-w-32 .sm:max-w-60 md:rounded-se-none md:max-w-52 .md:max-w-xs">
             {{-- <img class="size-full absolute top-0 start-0 object-cover" src="https://la27ferreteria.com.ar/storage/files/shares/ficha c cable.jpg" alt="Card Image"> --}}
 
             @if (is_array($product->image_url) && count($product->image_url))
                 @foreach ($product->image_url as $image)
-                    <img class="size-full absolute top-0 start-0 object-cover mb-2" src="{{ asset('storage') }}/{{ $image }}" alt="Card Image" loading="lazy">
+                    <img class="size-full absolute top-0 start-0 object-contain .md:object-cover mb-2" src="{{ asset('storage') }}/{{ $image }}" alt="Card Image" loading="lazy">
                 @endforeach
             @else
                 <p class="text-center text-gray-500">No hay imágenes disponibles.</p>
@@ -14,7 +14,7 @@
         </div>
         <div class="flex flex-wrap">
             <div class="p-4 flex flex-col h-full sm:p-7">
-                <p class="text-gray-500 dark:text-neutral-400">SKU: {{ $product->sku }}</p>
+                <p class="text-gray-500 dark:text-neutral-400">Código interno: {{  $product->id }} | SKU: {{ $product->sku }}</p>
                 <h3 class="text-lg font-bold text-gray-800 dark:text-white">{{ $product->name }}</h3>
                 <h3 class="text-sm font-bold text-blue-800 dark:text-white">
                     <span>{{ $product->family->name }}</span><span class="mx-2">-</span><span>{{ $product->category->name }}</span>
@@ -22,8 +22,7 @@
                 <p class="m-1 mb-4 line-clamp-4 text-gray-500 dark:text-neutral-400">{!! $product->description !!}</p>
                 <div class="mt-5 sm:mt-auto">
                     <p class="text-2xl font-semibold text-gray-500 dark:text-neutral-500">
-                        {{-- $ {{ $product->price_1 }} --}}
-                        $ {{ $product->choosePriceToUserPriceList($product) }}
+                        $ {{ number_format(round($product->choosePriceToUserPriceList($product)), 0, ',', '.') }}
                     </p>
 
                     <div class="my-2"></div>
