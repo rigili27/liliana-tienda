@@ -94,7 +94,7 @@ class ProductCreateHandlerJob implements ShouldQueue
             // 'activo' => 'active',
             // 'CodOrigen' => 'sku',
             // 'CodDeBarra' => 'bar_code',
-            // 'fotos' => 'image_url',
+            'Imagen' => 'image_url',
 
             'Codigo' => 'id',
             'Descripcion' => 'name',
@@ -127,7 +127,7 @@ class ProductCreateHandlerJob implements ShouldQueue
                 $mappedData['category_id'] = (int) ($family_id . $category_id);
                 
 
-            } elseif ($key === 'fotos') {
+            } elseif ($key === 'Imagen') {
                 $mappedData[$fieldMapping[$key]] = $this->transformPhotoPath($value);
             } else {
                 $mappedData[$fieldMapping[$key] ?? $key] = $value;
