@@ -4,13 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class Product extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     // protected $guarded = [];
 
@@ -47,10 +48,10 @@ class Product extends Model
 
     protected static function booted()
     {
-        static::deleted(function (Product $product){
-            Log::info("Deleted");
+        static::forceDeleted(function (Product $product){
+            Log::info("forceDeleted");
             foreach($product->image_url as $image) {
-                Log::info("Deleted -Intentando eliminar: public/$image");
+                Log::info("forceDeleted -Intentando eliminar: public/$image");
                 Storage::disk('public')->delete($image);
             }
         });
