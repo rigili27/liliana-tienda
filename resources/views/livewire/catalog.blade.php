@@ -4,9 +4,11 @@
     </div> --}}
     <x-navbar  />
 
-    <div class="grid grid-cols-5 gap-8">
+    <div class="mt-5"></div>
 
-        <div>
+    <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 mx-0 md:mx-5">
+
+        <div class="hidden lg:block">
 
             @if (Cache::get('temp_b') != '')
                 <div class=" max-w-xs">
