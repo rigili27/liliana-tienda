@@ -173,7 +173,7 @@ class SearchService
     }
 
     // Obtener todos los productos
-    $products = $productsQuery->get();
+    $products = $productsQuery->orderBy('name')->get();
 
     // Coincidencias exactas en id, name o sku
     $exactMatches = $products->filter(function ($product) use ($searchTerm) {
@@ -190,9 +190,12 @@ class SearchService
             $idMatch = (is_numeric($searchTerm) && $product->id == $searchTerm) ? 0 : PHP_INT_MAX;
 
             // Priorizar `id`, luego `name`, luego `sku`
+            Log::info('Si hay coincidencias exactas, devolver solo esas AA');
             return min($idMatch, $namePosition !== false ? $namePosition : PHP_INT_MAX, $skuPosition !== false ? $skuPosition : PHP_INT_MAX);
+            
         });
 
+        Log::info('Si hay coincidencias exactas, devolver solo esas BB');
         return $this->paginateCollection($sortedExactMatches, 10);
     }
 
@@ -208,6 +211,7 @@ class SearchService
             'maxSimilarity' => max($nameSimilarity, $skuSimilarity),
         ];
     })->filter(function ($item) {
+        Log::info('Coincidencias similares en name o sku (id solo se busca exacto, no es relevante aquí)');
         return $item['maxSimilarity'] > 6;
     });
 
@@ -223,9 +227,11 @@ class SearchService
             $sortedSimilarMatches = $sortedSimilarMatches->sortBy('name');
         }
 
+        Log::info('Ordenar por similitud y devolver AA');
         return $this->paginateCollection($sortedSimilarMatches, 10);
     }
 
+    Log::info('Ordenar por similitud y devolver BBB');
     return $this->paginateCollection(collect([]), 10);
 }
 
@@ -247,6 +253,10 @@ class SearchService
             ['path' => LengthAwarePaginator::resolveCurrentPath()]
         );
     }
+    
+
+    ////
+
     
 
     
