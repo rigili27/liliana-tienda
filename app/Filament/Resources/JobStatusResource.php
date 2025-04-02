@@ -40,7 +40,7 @@ class JobStatusResource extends Resource
     // Badges para info
     public static function getNavigationBadge(): ?string
     {
-        return static::getModel()::where('status', 'in_progress')->count();
+        return static::getModel()::where('status', 'failed')->count();
     }
     public static function getNavigationBadgeColor(): ?string
     {
