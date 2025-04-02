@@ -121,15 +121,18 @@ class ProductResource extends Resource
                 Tables\Columns\TextColumn::make('price_1')
                     ->label('Precio Público 1')
                     ->numeric(locale: 'nl')
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: false),
                 Tables\Columns\TextColumn::make('price_2')
                     ->label('Precio Público 2')
                     ->numeric(locale: 'nl')
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: false),
                 Tables\Columns\TextColumn::make('price_3')
                     ->label('Precio Público 3')
                     ->numeric(locale: 'nl')
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: false),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
