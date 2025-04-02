@@ -2,6 +2,8 @@
 
 namespace App\Jobs;
 
+use App\Models\Category;
+use App\Models\Family;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Foundation\Queue\Queueable;
@@ -61,8 +63,30 @@ class ProductCreateHandlerJob implements ShouldQueue
             $jobStatus->markAsCompleted();
             Log::info("Job completado exitosamente", ['job_status_id' => $this->jobStatusId]);
         } catch (\Exception $e) {
-            $jobStatus->markAsFailed($e->getMessage());
-            Log::error("Error en el Job", ['job_status_id' => $this->jobStatusId, 'message' => $e->getMessage()]);
+            // $jobStatus->markAsFailed($e->getMessage());
+            // Log::error("Error en el Job", ['job_status_id' => $this->jobStatusId, 'message' => $e->getMessage()]);
+
+            $errorMessage = $e->getMessage();
+
+            // Capturar violación de clave foránea (error 1452)
+            if ($e->getCode() == '23000') {
+                Log::error("Violación de clave foránea en el Job", [
+                    'job_status_id' => $this->jobStatusId,
+                    'error_message' => $errorMessage
+                ]);
+
+                $errorMessage = $this->getForeignKeyErrorMessage($filteredData);
+            }
+
+            // Guardar el mensaje en JobStatus antes de lanzar la excepción
+            $jobStatus->markAsFailed($errorMessage);
+
+            Log::error("Error en el Job", [
+                'job_status_id' => $this->jobStatusId,
+                'message' => $errorMessage
+            ]);
+
+            throw new \Exception($errorMessage);
         }
     }
 
@@ -162,13 +186,51 @@ class ProductCreateHandlerJob implements ShouldQueue
     }
 
     /**
+     * Verifica la existencia de las claves foráneas en la base de datos.
+     */
+    protected function checkForeignKeys(array $filteredData): void
+    {
+        $familyExists = Family::find($filteredData['family_id']);
+        $categoryExists = Category::find($filteredData['category_id']);
+
+        if (!$familyExists) {
+            throw new \Exception("El Rubro con ID {$filteredData['family_id']} no existe.");
+        }
+
+        if (!$categoryExists) {
+            throw new \Exception("El SubRubro con ID {$filteredData['category_id']} no existe.");
+        }
+    }
+
+    /**
+     * Obtiene el mensaje de error dependiendo de qué clave foránea está mal.
+     */
+    protected function getForeignKeyErrorMessage(array $filteredData): string
+    {
+        $familyExists = Family::find($filteredData['family_id']);
+        $categoryExists = Category::find($filteredData['category_id']);
+
+        if (!$familyExists && !$categoryExists) {
+            return "El Rubro con ID {$filteredData['family_id']} y el SubRubro con ID {$filteredData['category_id']} no existen.";
+        } elseif (!$familyExists) {
+            return "El Rubro con ID {$filteredData['family_id']} no existe.";
+        } elseif (!$categoryExists) {
+            return "El SubRubro con ID {$filteredData['category_id']} no existe.";
+        }
+
+        return "Error desconocido en las claves foráneas.";
+    }
+
+    /**
      * Actualiza un registro existente si hay cambios, o lo crea si no existe.
      */
     protected function updateOrCreateRecord(array $filteredFields, $model): void
     {
         Log::info('Intentando actualizar o crear registro con ID:', ['id' => $filteredFields['id']]);
 
-        $existingRecord = $model::find($filteredFields['id']);
+        // $existingRecord = $model::find($filteredFields['id']);
+        $existingRecord = $model::withTrashed()->find($filteredFields['id']);
+
         if ($existingRecord) {
             if ($this->hasChanges($existingRecord, $filteredFields)) {
                 $existingRecord->update($filteredFields);
