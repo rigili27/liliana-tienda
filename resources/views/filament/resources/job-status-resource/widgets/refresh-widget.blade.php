@@ -26,6 +26,10 @@
             Products Refresh
         </x-filament::button>
 
+        <x-filament::button wire:click="refreshCompanySettings" color="primary">
+            CompanySettings Refresh
+        </x-filament::button>
+
     </x-filament::section>
 
 

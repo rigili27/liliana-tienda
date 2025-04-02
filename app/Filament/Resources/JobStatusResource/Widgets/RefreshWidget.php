@@ -87,4 +87,23 @@ class RefreshWidget extends Widget
                 ->send();
         }
     }
+
+    public function refreshCompanySettings()
+    {
+        try {
+            Artisan::call('migrate:company_settings');
+
+            Notification::make()
+                ->title('Éxito')
+                ->body('La tabla de company_settings fue refrescada correctamente.')
+                ->success()
+                ->send();
+        } catch (\Exception $e) {
+            Notification::make()
+                ->title('Error')
+                ->body('No se pudo refrescar la tabla de company_settings.')
+                ->danger()
+                ->send();
+        }
+    }
 }
