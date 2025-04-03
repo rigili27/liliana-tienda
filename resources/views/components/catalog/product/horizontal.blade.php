@@ -16,9 +16,9 @@
             <div class="p-4 flex flex-col h-full sm:p-7">
                 <p class="text-gray-500 dark:text-neutral-400">Código interno: {{  $product->id }} | SKU: {{ $product->sku }}</p>
                 <h3 class="text-lg font-bold text-gray-800 dark:text-white">{{ $product->name }}</h3>
-                <h3 class="text-sm font-bold text-blue-800 dark:text-white">
+                {{-- <h3 class="text-sm font-bold text-blue-800 dark:text-white">
                     <span>{{ $product->family->name }}</span><span class="mx-2">-</span><span>{{ $product->category->name }}</span>
-                </h3>
+                </h3> --}}
                 <p class="m-1 mb-4 line-clamp-4 text-gray-500 dark:text-neutral-400">{!! $product->description !!}</p>
                 <div class="mt-5 sm:mt-auto">
                     <p class="text-2xl font-semibold text-gray-500 dark:text-neutral-500">
