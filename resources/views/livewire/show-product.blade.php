@@ -23,7 +23,7 @@
                     <h1 class="block text-3xl font-bold text-gray-800 lg:leading-tight dark:text-white">{{ $product->name }}</h1>
 
                     <div class="flex gap-8 mt-5">
-                        <p class="text-3xl font-semibold text-gray-500 dark:text-neutral-500">
+                        <p class="text-3xl font-bold text-black">
                             {{-- $ {{ $product->choosePriceToUserPriceList($product) }} --}}
                             $ {{ number_format(round($product->choosePriceToUserPriceList($product)), 0, ',', '.') }}
                         </p>
