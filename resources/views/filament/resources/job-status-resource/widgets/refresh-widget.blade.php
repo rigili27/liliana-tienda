@@ -30,6 +30,10 @@
             CompanySettings Refresh
         </x-filament::button>
 
+        <x-filament::button wire:click="refreshHeros" color="primary">
+            Heros Refresh
+        </x-filament::button>
+
     </x-filament::section>
 
 

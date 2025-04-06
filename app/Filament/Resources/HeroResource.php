@@ -46,6 +46,8 @@ class HeroResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('name')
                     ->maxLength(255),
+                Forms\Components\TextInput::make('link')
+                    ->maxLength(255),
                 Forms\Components\FileUpload::make('image_url')
                     ->image()
                     ->maxSize(3000)
@@ -66,6 +68,8 @@ class HeroResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('link')
                     ->searchable(),
                 Tables\Columns\ImageColumn::make('image_url'),
                 Tables\Columns\TextColumn::make('created_at')

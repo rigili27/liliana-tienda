@@ -106,4 +106,23 @@ class RefreshWidget extends Widget
                 ->send();
         }
     }
+
+    public function refreshHeros()
+    {
+        try {
+            Artisan::call('migrate:heros');
+
+            Notification::make()
+                ->title('Éxito')
+                ->body('La tabla de heros fue refrescada correctamente.')
+                ->success()
+                ->send();
+        } catch (\Exception $e) {
+            Notification::make()
+                ->title('Error')
+                ->body('No se pudo refrescar la tabla de heros.')
+                ->danger()
+                ->send();
+        }
+    }
 }

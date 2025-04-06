@@ -12,6 +12,7 @@ class Hero extends Model
         'id',
         'name',
         'image_url',
+        'link',
     ];
 
     protected static function booted()
