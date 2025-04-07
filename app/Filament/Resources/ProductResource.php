@@ -40,6 +40,7 @@ class ProductResource extends Resource
     {
         return $form
             ->schema([
+
                 Forms\Components\Select::make('family_id')
                     ->relationship('family', 'name')
                     ->preload()
@@ -63,33 +64,33 @@ class ProductResource extends Resource
                         '16:9',
                         '4:3',
                         '1:1',
-                    ])      
+                    ])
                     ->getUploadedFileNameForStorageUsing(
-                        fn (TemporaryUploadedFile $file): string => (string) str($file->getClientOriginalName())
+                        fn(TemporaryUploadedFile $file): string => (string) str($file->getClientOriginalName())
                             ->prepend('product-'  . Carbon::now()->format('YmdHis') . '-'),
                     ),
 
                 Hidden::make('position')
-                ->default(1),
+                    ->default(1),
 
                 Textarea::make('description')
-                ->columnSpanFull(),
+                    ->columnSpanFull(),
 
                 Section::make('Indentificación')
-                ->schema([
-                    TextInput::make('sku'),
-                    TextInput::make('bar_code'),
-                ])->columns(2),
+                    ->schema([
+                        TextInput::make('sku'),
+                        TextInput::make('bar_code'),
+                    ])->columns(2),
 
                 Section::make('price')
-                ->schema([
-                    TextInput::make('price_1'),
-                    TextInput::make('price_2'),
-                    TextInput::make('price_3'),
-                    TextInput::make('price_m_1'),
-                    TextInput::make('price_m_2'),
-                    TextInput::make('price_m_3'),
-                ])->columns(3)
+                    ->schema([
+                        TextInput::make('price_1'),
+                        TextInput::make('price_2'),
+                        TextInput::make('price_3'),
+                        TextInput::make('price_m_1'),
+                        TextInput::make('price_m_2'),
+                        TextInput::make('price_m_3'),
+                    ])->columns(3)
             ]);
     }
 
@@ -97,12 +98,12 @@ class ProductResource extends Resource
     {
         return $table
             ->columns([
+
                 Tables\Columns\TextColumn::make('id')
-                    ->label('Código'),
-                Tables\Columns\TextColumn::make('sku')
-                    ->label('Código de Origen - SKU')
+                    ->label('Código')
                     ->searchable()
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: false),
                 Tables\Columns\TextColumn::make('family.name')
                     ->searchable()
                     ->label('Rubro')
@@ -115,14 +116,20 @@ class ProductResource extends Resource
                 Tables\Columns\TextColumn::make('name')
                     ->label('Nombre')
                     ->sortable()
-                    ->searchable(),
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: false),
+                Tables\Columns\TextColumn::make('sku')
+                    ->label('Código de Origen - SKU')
+                    ->searchable()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: false),
                 Tables\Columns\ImageColumn::make('image_url')
                     ->label('Imágen'),
                 Tables\Columns\TextColumn::make('price_1')
                     ->label('Precio Público 1')
                     ->numeric(locale: 'nl')
                     ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: false),
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('price_2')
                     ->label('Precio Público 2')
                     ->numeric(locale: 'nl')
