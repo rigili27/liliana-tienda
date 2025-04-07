@@ -24,17 +24,6 @@ class HeroResource extends Resource
     protected static ?string $navigationGroup = 'Empresa';
     protected static ?string $label = 'Banners';
 
-    // Badges para info
-    public static function getNavigationBadge(): ?string
-    {
-        return 'En construcción';
-    }
-    public static function getNavigationBadgeColor(): ?string
-    {
-        return 'danger';
-    }
-    // Badges para info
-
     public static function canAccess(): bool
     {
         return auth()->user()->hasRole('admin');
