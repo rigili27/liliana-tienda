@@ -132,7 +132,12 @@ class ProductResource extends Resource
                     ->label('Precio Público 3')
                     ->numeric(locale: 'nl')
                     ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: false),
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('attributes.show_name')
+                    ->color('success')
+                    ->badge()
+                    ->label('Atributos')
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -149,6 +154,23 @@ class ProductResource extends Resource
                 // Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
                 Tables\Actions\RestoreAction::make(),
+                Tables\Actions\Action::make('atributos')
+                    ->label('Asignar Atributos')
+                    ->color('success')
+                    ->icon('heroicon-o-star')
+                    ->form([
+                        Forms\Components\CheckboxList::make('attributes_ids') // 👈 usamos otro nombre para evitar conflictos
+                            ->label('Atributos')
+                            ->options(fn() => \App\Models\Attribute::pluck('show_name', 'id')) // 👈 listamos manualmente
+                            ->default(fn($record) => $record->attributes->pluck('id')->toArray())
+                            ->columns(1),
+                    ])
+                    ->action(function ($record, array $data) {
+                        // Verificamos que la key exista
+                        $record->attributes()->sync($data['attributes_ids'] ?? []);
+                    })
+                    ->modalHeading('Asignar atributos al producto'),
+
             ])
             ->bulkActions([
                 // Tables\Actions\BulkActionGroup::make([
