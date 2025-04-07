@@ -44,13 +44,15 @@ class Product extends Model
 
     protected $casts = [
         'image_url' => 'array',
+
     ];
+
 
     protected static function booted()
     {
-        static::forceDeleted(function (Product $product){
+        static::forceDeleted(function (Product $product) {
             Log::info("forceDeleted");
-            foreach($product->image_url as $image) {
+            foreach ($product->image_url as $image) {
                 Log::info("forceDeleted -Intentando eliminar: public/$image");
                 Storage::disk('public')->delete($image);
             }
@@ -58,25 +60,25 @@ class Product extends Model
 
         static::updating(function (Product $product) {
             Log::info("Updating");
-        
+
             // Asegúrate de que los valores sean arrays válidos
             $originalImages = $product->getOriginal('image_url') ?? [];
             $currentImages = $product->image_url ?? [];
-        
+
             if (!is_array($originalImages)) {
                 $originalImages = json_decode($originalImages, true) ?: [];
             }
-        
+
             if (!is_array($currentImages)) {
                 $currentImages = json_decode($currentImages, true) ?: [];
             }
-        
+
             // Determina las imágenes a eliminar
             $imagesToDelete = array_diff($originalImages, $currentImages);
-        
+
             foreach ($imagesToDelete as $image) {
                 Log::info("Updating - Intentando eliminar: public/$image");
-        
+
                 // Elimina la imagen del disco público
                 if (Storage::disk('public')->exists($image)) {
                     Storage::disk('public')->delete($image);
@@ -86,7 +88,6 @@ class Product extends Model
                 }
             }
         });
-        
     }
 
 
@@ -96,20 +97,28 @@ class Product extends Model
         return is_array($value) ? $value : json_decode($value, true);
     }
 
-    public function family(){
+    public function family()
+    {
         return $this->belongsTo(Family::class, 'family_id');
     }
 
-    public function category(){
+    public function category()
+    {
         return $this->belongsTo(Category::class, 'category_id');
     }
 
-    public static function getProducts($quantity = '', $order = 'asc', $randomFamily = false, $randomProduct = false, $news=false, $inStock=false)
+    public function attributes()
+    {
+        return $this->belongsToMany(Attribute::class, 'product_attributes', 'product_id', 'attribute_id');
+    }
+
+
+    public static function getProducts($quantity = '', $order = 'asc', $randomFamily = false, $randomProduct = false, $news = false, $inStock = false)
     {
         $products = Product::query();
 
         // Solo productos con stock
-        if ($inStock){
+        if ($inStock) {
             $products = $products->where('stock', '>', 0);
         }
 
@@ -119,9 +128,9 @@ class Product extends Model
         }
 
         // Filtro inicial: productos con precio mayor a 0 y que tengan una imagen
-        $products = $products->where('price_1', '>', 0)
-                            ->whereNotNull('image_url')
-                            ->where('image_url', '!=', '[]');
+        $products = $products->where('price_2', '>', 0)
+            ->whereNotNull('image_url')
+            ->where('image_url', '!=', '[]');
 
         // Filtrar por una familia aleatoria
         if ($randomFamily) {
@@ -151,7 +160,7 @@ class Product extends Model
             $products = $products->take($quantity);
         }
 
-        
+
 
         $result = $products->get();
 
@@ -172,7 +181,8 @@ class Product extends Model
         });
     }
 
-    public static function choosePriceToUserPriceList(Product $product){
+    public static function choosePriceToUserPriceList(Product $product)
+    {
 
         //if(!Auth::user()){
         //    return $product->price_1;
@@ -190,6 +200,4 @@ class Product extends Model
 
         return $product->price_2;
     }
-
-
 }
