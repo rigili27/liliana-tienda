@@ -20,8 +20,15 @@ use Filament\Forms\Components\TimePicker;
 class CompanySettingResource extends Resource
 {
     protected static ?string $model = CompanySetting::class;
-    protected static ?string $navigationIcon = 'heroicon-o-cog';
-    protected static ?string $navigationGroup = 'Configuración';
+    protected static ?string $navigationIcon = 'heroicon-o-clock';
+
+    protected static ?string $navigationGroup = 'Empresa';
+    protected static ?string $label = 'Horario';
+
+    public static function canAccess(): bool
+    {
+        return auth()->user()->hasRole('admin');
+    }
 
     public static function form(Forms\Form $form): Forms\Form
     {
@@ -36,64 +43,64 @@ class CompanySettingResource extends Resource
                 //     ->columnSpanFull(),
 
                 Repeater::make('business_hours')
-    ->label('Horarios de atención')
-    ->schema([
-        Select::make('day')
-            ->label('Día de la semana')
-            ->options([
-                'monday' => 'Lunes',
-                'tuesday' => 'Martes',
-                'wednesday' => 'Miércoles',
-                'thursday' => 'Jueves',
-                'friday' => 'Viernes',
-                'saturday' => 'Sábado',
-                'sunday' => 'Domingo',
-            ])
-            ->required(),
-
-        Grid::make(2)->schema([
-            TimePicker::make('open')
-                ->label('Apertura mañana')
-                ->withoutSeconds()
-                ->nullable(),
-
-            TimePicker::make('close')
-                ->label('Cierre mañana')
-                ->withoutSeconds()
-                ->nullable(),
-        ]),
-
-        Grid::make(2)->schema([
-            TimePicker::make('open_afternoon')
-                ->label('Apertura tarde')
-                ->withoutSeconds()
-                ->nullable(),
-
-            TimePicker::make('close_afternoon')
-                ->label('Cierre tarde')
-                ->withoutSeconds()
-                ->nullable(),
-        ]),
-    ])
-    ->columnSpanFull(),
-
-                Repeater::make('payment_methods')
-                    ->label('Medios de pago')
+                    ->label('Horarios de atención')
                     ->schema([
-                        TextInput::make('method')->label('Método de pago'),
+                        Select::make('day')
+                            ->label('Día de la semana')
+                            ->options([
+                                'monday' => 'Lunes',
+                                'tuesday' => 'Martes',
+                                'wednesday' => 'Miércoles',
+                                'thursday' => 'Jueves',
+                                'friday' => 'Viernes',
+                                'saturday' => 'Sábado',
+                                'sunday' => 'Domingo',
+                            ])
+                            ->required(),
+
+                        Grid::make(2)->schema([
+                            TimePicker::make('open')
+                                ->label('Apertura mañana')
+                                ->withoutSeconds()
+                                ->nullable(),
+
+                            TimePicker::make('close')
+                                ->label('Cierre mañana')
+                                ->withoutSeconds()
+                                ->nullable(),
+                        ]),
+
+                        Grid::make(2)->schema([
+                            TimePicker::make('open_afternoon')
+                                ->label('Apertura tarde')
+                                ->withoutSeconds()
+                                ->nullable(),
+
+                            TimePicker::make('close_afternoon')
+                                ->label('Cierre tarde')
+                                ->withoutSeconds()
+                                ->nullable(),
+                        ]),
                     ])
-                    ->addable()
-                    ->deletable()
                     ->columnSpanFull(),
 
-                Repeater::make('delivery_methods')
-                    ->label('Medios de entrega')
-                    ->schema([
-                        TextInput::make('method')->label('Método de entrega'),
-                    ])
-                    ->addable()
-                    ->deletable()
-                    ->columnSpanFull(),
+                // Repeater::make('payment_methods')
+                //     ->label('Medios de pago')
+                //     ->schema([
+                //         TextInput::make('method')->label('Método de pago'),
+                //     ])
+                //     ->addable()
+                //     ->deletable()
+                //     ->columnSpanFull(),
+
+                // Repeater::make('delivery_methods')
+                //     ->label('Medios de entrega')
+                //     ->schema([
+                //         TextInput::make('method')->label('Método de entrega'),
+                //     ])
+                //     ->addable()
+                //     ->deletable()
+                //     ->columnSpanFull(),
 
                 // Toggle::make('show_catalog')
                 //     ->label('Mostrar catálogo dentro del horario establecido')
@@ -106,8 +113,8 @@ class CompanySettingResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('business_hours')->label('Horarios')->limit(50),
-                TextColumn::make('payment_methods')->label('Medios de pago')->limit(50),
-                TextColumn::make('delivery_methods')->label('Medios de entrega')->limit(50),
+                // TextColumn::make('payment_methods')->label('Medios de pago')->limit(50),
+                // TextColumn::make('delivery_methods')->label('Medios de entrega')->limit(50),
                 // TextColumn::make('show_catalog')->label('Mostrar catálogo')->boolean(),
             ])
             ->filters([])
