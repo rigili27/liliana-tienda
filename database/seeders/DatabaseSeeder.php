@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
             CompanySettingSeeder::class,
             RoleSeeder::class,
             UserSeeder::class,
+            AttributeSeeder::class
         ]);
 
 
