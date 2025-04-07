@@ -34,6 +34,10 @@
             Heros Refresh
         </x-filament::button>
 
+        <x-filament::button wire:click="refreshAttributes" color="primary">
+            Attributes Refresh
+        </x-filament::button>
+
     </x-filament::section>
 
 

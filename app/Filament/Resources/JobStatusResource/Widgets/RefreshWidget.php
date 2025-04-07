@@ -125,4 +125,23 @@ class RefreshWidget extends Widget
                 ->send();
         }
     }
+
+    public function refreshAttributes()
+    {
+        try {
+            Artisan::call('migrate:attributes');
+
+            Notification::make()
+                ->title('Éxito')
+                ->body('La tabla de attributes fue refrescada correctamente.')
+                ->success()
+                ->send();
+        } catch (\Exception $e) {
+            Notification::make()
+                ->title('Error')
+                ->body('No se pudo refrescar la tabla de attributes.')
+                ->danger()
+                ->send();
+        }
+    }
 }
