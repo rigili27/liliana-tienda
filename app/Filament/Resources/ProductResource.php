@@ -148,7 +148,14 @@ class ProductResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                TrashedFilter::make(),
+                TrashedFilter::make()->label('Registros eliminados'),
+                Tables\Filters\SelectFilter::make('attributes')
+                    ->label('Filtrar por Atributo')
+                    ->placeholder('Todo')
+                    ->preload()
+                    ->relationship('attributes', 'show_name')
+                    ->multiple()
+
             ])
             ->actions([
                 // Tables\Actions\EditAction::make(),
