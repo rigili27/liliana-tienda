@@ -10,6 +10,10 @@
             Migrate refresh
         </x-slot>
 
+        <p>Éstos botones borran y configuran valores predeterminados en las tablas específicas.</p>
+
+        <div class="my-4"></div>
+
         <x-filament::button wire:click="refreshBusinesses" color="primary">
             Business Refresh
         </x-filament::button>
