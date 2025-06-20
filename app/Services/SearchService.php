@@ -31,15 +31,15 @@ class SearchService
             $productsQuery->where('category_id', $filters['category']);
         }
 
-        // Forzar minúsculas en el término de búsqueda
-        $normalizedSearchTerm = is_string($searchTerm) ? mb_strtolower(trim($searchTerm)) : $searchTerm;
+        // Forzar minúsculas y remover acentos en el término de búsqueda
+        $normalizedSearchTerm = is_string($searchTerm) ? $this->normalizeText(trim($searchTerm)) : $searchTerm;
 
         // Si no hay término de búsqueda, aplicar orden por defecto o el especificado
         if (empty($normalizedSearchTerm)) {
             if ($order === 'asc') {
-                $productsQuery->orderBy('price_1', 'asc');
+                $productsQuery->orderBy('price_2', 'asc');
             } elseif ($order === 'desc') {
-                $productsQuery->orderBy('price_1', 'desc');
+                $productsQuery->orderBy('price_2', 'desc');
             } elseif ($order === 'name') {
                 $productsQuery->orderBy('name', 'asc');
             } else {
@@ -57,30 +57,40 @@ class SearchService
         // Coincidencias exactas en id, name o sku o description
         $exactMatches = $products->filter(function ($product) use ($normalizedSearchTerm) {
             return (
-                stripos(mb_strtolower($product->name), $normalizedSearchTerm) !== false ||
-                stripos(mb_strtolower($product->sku), $normalizedSearchTerm) !== false ||
-                stripos(mb_strtolower($product->description ?? ''), $normalizedSearchTerm) !== false ||
+                stripos($this->normalizeText($product->name), $normalizedSearchTerm) !== false ||
+                stripos($this->normalizeText($product->sku), $normalizedSearchTerm) !== false ||
+                stripos($this->normalizeText($product->description ?? ''), $normalizedSearchTerm) !== false ||
                 (is_numeric($normalizedSearchTerm) && $product->id == $normalizedSearchTerm)
             );
         });
-
+        
         if ($exactMatches->isNotEmpty()) {
             $sortedExactMatches = $exactMatches->sortBy(function ($product) use ($normalizedSearchTerm) {
-                $namePosition = stripos(mb_strtolower($product->name), $normalizedSearchTerm);
-                $skuPosition = stripos(mb_strtolower($product->sku), $normalizedSearchTerm);
+                $namePosition = stripos($this->normalizeText($product->name), $normalizedSearchTerm);
+                $skuPosition = stripos($this->normalizeText($product->sku), $normalizedSearchTerm);
                 $idMatch = (is_numeric($normalizedSearchTerm) && $product->id == $normalizedSearchTerm) ? 0 : PHP_INT_MAX;
 
                 return min($idMatch, $namePosition !== false ? $namePosition : PHP_INT_MAX, $skuPosition !== false ? $skuPosition : PHP_INT_MAX);
             });
 
+            if ($order === 'asc') {
+                $sortedExactMatches = $sortedExactMatches->sortBy('price_2');
+            } elseif ($order === 'desc') {
+                $sortedExactMatches = $sortedExactMatches->sortByDesc('price_2');
+            } elseif ($order === 'name') {
+                $sortedExactMatches = $sortedExactMatches->sortBy('name');
+            }
+
+
             return $this->paginateCollection($sortedExactMatches, 10);
         }
 
+
         // Coincidencias similares
         $similarMatches = $products->map(function ($product) use ($normalizedSearchTerm) {
-            $name = mb_strtolower($product->name);
-            $sku = mb_strtolower($product->sku);
-            $desc = mb_strtolower($product->description ?? '');
+            $name = $this->normalizeText($product->name);
+            $sku = $this->normalizeText($product->sku);
+            $desc = $this->normalizeText($product->description ?? '');
 
             similar_text($normalizedSearchTerm, $name, $namePercentMatch);
             similar_text($normalizedSearchTerm, $sku, $skuPercentMatch);
@@ -101,9 +111,9 @@ class SearchService
             $sortedSimilarMatches = $similarMatches->sortByDesc('maxSimilarity')->pluck('product');
 
             if ($order === 'asc') {
-                $sortedSimilarMatches = $sortedSimilarMatches->sortBy('price_1');
+                $sortedSimilarMatches = $sortedSimilarMatches->sortBy('price_2');
             } elseif ($order === 'desc') {
-                $sortedSimilarMatches = $sortedSimilarMatches->sortByDesc('price_1');
+                $sortedSimilarMatches = $sortedSimilarMatches->sortByDesc('price_2');
             } elseif ($order === 'name') {
                 $sortedSimilarMatches = $sortedSimilarMatches->sortBy('name');
             }
@@ -129,5 +139,21 @@ class SearchService
             $currentPage,
             ['path' => LengthAwarePaginator::resolveCurrentPath()]
         );
+    }
+
+    /**
+     * Normaliza texto: minúsculas y sin acentos
+     */
+    private function normalizeText($text)
+    {
+        $text = mb_strtolower($text);
+
+        $normalizeChars = [
+            'á' => 'a', 'é' => 'e', 'í' => 'i',
+            'ó' => 'o', 'ú' => 'u', 'ü' => 'u',
+            'ñ' => 'n',
+        ];
+
+        return strtr($text, $normalizeChars);
     }
 }
