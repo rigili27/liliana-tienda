@@ -47,7 +47,7 @@ class BusinessResource extends Resource
                     ])      
                     ->getUploadedFileNameForStorageUsing(
                         fn (TemporaryUploadedFile $file): string => (string) str($file->getClientOriginalName())
-                            ->prepend('business/desktop_logo-'  . Carbon::now()->format('YmdHis') . '-'),
+                            ->prepend('business/desktop-logo-'  . Carbon::now()->format('YmdHis') . '-'),
                     ),
                 Forms\Components\FileUpload::make('mobile_logo_url')
                     ->image()
@@ -59,7 +59,7 @@ class BusinessResource extends Resource
                     ])      
                     ->getUploadedFileNameForStorageUsing(
                         fn (TemporaryUploadedFile $file): string => (string) str($file->getClientOriginalName())
-                            ->prepend('business/mobile_logo-'  . Carbon::now()->format('YmdHis') . '-'),
+                            ->prepend('business/mobile-logo-'  . Carbon::now()->format('YmdHis') . '-'),
                     ),
             ]);
     }
@@ -71,10 +71,10 @@ class BusinessResource extends Resource
                 Tables\Columns\TextColumn::make('name')
                     ->label('Nombre')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('desktop_logo_url')
+                Tables\Columns\ImageColumn::make('desktop_logo_url')
                     ->label('Logo tamaño PC')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('mobile_logo_url')
+                Tables\Columns\ImageColumn::make('mobile_logo_url')
                     ->label('Logo tamaño Móvil')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
