@@ -141,6 +141,8 @@ class ProductResource extends Resource
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('attributes.show_name')
+                    ->sortable()
+                    ->searchable()
                     ->color('success')
                     ->badge()
                     ->label('Atributos')
