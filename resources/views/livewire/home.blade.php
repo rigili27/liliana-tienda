@@ -1,48 +1,45 @@
 <div>
+
     <x-navbar />
 
-    <x-home.slider-hero :families="$families" :heros="$heros" />
+    <x-home.slider-hero :families="$families" :heros="$heros" :listattributes="$list_attributes" />
 
     <div class="my-9"></div>
 
-    {{-- @if ($todaySchedule)
-        <p>Horario de hoy:</p>
-        <p>Mañana: {{ $todaySchedule['open'] ?? 'Cerrado' }} - {{ $todaySchedule['close'] ?? 'Cerrado' }}</p>
-        <p>Tarde: {{ $todaySchedule['open_afternoon'] ?? 'Cerrado' }} - {{ $todaySchedule['close_afternoon'] ?? 'Cerrado' }}</p>
-    @else
-        <p>Hoy está cerrado.</p>
-    @endif --}}
-
-    <x-home.card-company-setting :todaySchedule="$todaySchedule" :addresses="$addresses" :phones="$phones" />
+    <div class="mx-2 md:mx-0">
+        <x-home.card-company-setting :todaySchedule="$todaySchedule" :addresses="$addresses" :phones="$phones" />
+    </div>
 
     <div class="my-14"></div>
 
-    {{-- info --}}
-    <div class="container mx-auto mt-9">
+    <div class="mx-2 md:mx-0">
 
-        <div class="grid grid-cols-2 gap-6">
+        {{-- info --}}
+        <div class="container mx-auto mt-9">
 
-            <div class="bg-red-100 border border-red-200 text-red-800 rounded-xl shadow-md sm:flex ">
-                <div class="shrink-0 relative w-52 rounded-t-xl overflow-hidden .pt-[40%] sm:rounded-s-xl .sm:max-w-60 md:rounded-se-none .md:max-w-xs">
-                    <img class="size-full absolute top-0 start-0 object-cover" src="https://www.colegioelatabal.com/wp-content/uploads/2023/05/Trabajando.png" alt="Card Image">
-                </div>
-                <div class="flex flex-wrap">
-                    <div class="p-4 flex flex-col h-full sm:p-7">
-                        <h3 class="text-2xl font-bold  dark:text-white uppercase">
-                            Importante !!
-                        </h3>
-                        <h3 class="text-lg mt-3 font-normal  dark:text-white uppercase">
-                            Te recordamos que los precios de la página pueden tener variaciones.
-                        </h3>
-                        <h3 class="text-lg mt-3 font-normal t dark:text-white uppercase">
-                            Trabajamos contastemente para estar actualizados.
-                        </h3>
+            <div class="grid grid-cols-1 gap-6">
 
+                <div class="bg-red-100 border border-red-200 text-red-800 rounded-xl shadow-md sm:flex ">
+                    <div class="shrink-0 relative w-52 rounded-t-xl overflow-hidden .pt-[40%] sm:rounded-s-xl .sm:max-w-60 md:rounded-se-none .md:max-w-xs">
+                        <img class="size-full absolute top-0 start-0 object-cover" src="https://www.colegioelatabal.com/wp-content/uploads/2023/05/Trabajando.png" alt="Card Image">
+                    </div>
+                    <div class="flex flex-wrap">
+                        <div class="p-4 flex flex-col h-full sm:p-7">
+                            <h3 class="text-2xl font-bold  dark:text-white uppercase">
+                                Importante !!
+                            </h3>
+                            <h3 class="text-lg mt-3 font-normal  dark:text-white uppercase">
+                                Te recordamos que los precios de la página pueden tener variaciones.
+                            </h3>
+                            <h3 class="text-lg mt-3 font-normal t dark:text-white uppercase">
+                                Trabajamos contastemente para estar actualizados.
+                            </h3>
+
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="bg-yellow-100 border border-yellow-200 text-yellow-800 rounded-xl shadow-md sm:flex ">
+                {{-- <div class="bg-yellow-100 border border-yellow-200 text-yellow-800 rounded-xl shadow-md sm:flex ">
                 <div class="shrink-0 relative w-52 rounded-t-xl overflow-hidden .pt-[40%] sm:rounded-s-xl .sm:max-w-60 md:rounded-se-none .md:max-w-xs">
                     <img class="size-full absolute top-0 start-0 object-cover" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-HevEErtoeUbI6MM0GzgBKNYPd4hVTm7Jgg&s" alt="Card Image">
                 </div>
@@ -58,42 +55,48 @@
 
                     </div>
                 </div>
+            </div> --}}
             </div>
+
+
         </div>
 
+        <div class="my-14"></div>
 
-    </div>
-
-
-    <div class="container mx-auto mt-9">
-        <div class="grid grid-cols-4 gap-4">
-
-            @foreach ($products as $product)
-                <div class="flex flex-col bg-white border border-gray-200 shadow-md rounded-xl">
-                    @if (is_array($product->image_url) && count($product->image_url))
-                        @foreach ($product->image_url as $image)
-                            <img class="w-full h-auto rounded-t-xl" src="{{ asset('storage') }}/{{ $image }}" alt="Card Image" loading="lazy">
-                        @endforeach
-                    @else
-                        <p class="text-center text-gray-500">No hay imágenes disponibles.</p>
+        @if ($product_by_attribute->count() > 0)
+            <div class="container mx-auto">
+                @foreach ($product_by_attribute as $attribute)
+                    @if ($attribute->products->count() > 0)
+                        <div class="flex items-center justify-between my-5">
+                            <p class="font-semibold text-lg uppercase">{{ $attribute->show_name }}</p>
+                            <span class="text-sm text-blue-600 cursor-pointer hover:underline" wire:click="goToCatalog('{{ $attribute->id }}')">Ver más</span>
+                        </div>
+                        <x-home.slider-product :products="$attribute->products" />
                     @endif
-                    <div class="p-4 md:p-5">
-                        <h3 class="text-lg font-bold text-gray-800 dark:text-white line-clamp-2">
-                            {{ $product->name }}
-                        </h3>
-                        <h3 class="text-2xl font-semibold text-gray-500 dark:text-neutral-500">
-                            $ {{ $product->choosePriceToUserPriceList($product) }}
-                        </h3>
-                        <p class="mt-1 text-gray-500 dark:text-neutral-400">
-                            Some quick example text to build on the card title and make up the bulk of the card's content.
-                        </p>
-                        <a class="mt-2 py-2 px-3 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-hidden focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none" href="#">
-                            {{ $product->choosePriceToUserPriceList($product) }}
-                        </a>
-                    </div>
+                @endforeach
+            </div>
+        @endif
+
+        @if ($products_by_family->count() > 0)
+            <div class="container mx-auto">
+                <div class="flex items-center justify-between my-5">
+                    <p class="font-semibold text-lg uppercase">{{ $products_by_family->first()->family->name }}</p>
+                    <span class="text-sm text-blue-600 cursor-pointer hover:underline" wire:click="goToCatalog('', {{ $products_by_family->first()->family->id }})">Ver más</span>
                 </div>
-            @endforeach
-        </div>
+                <x-home.slider-product :products="$products_by_family" />
+            </div>
+        @endif
+
+        @if ($products->count() > 3)
+            <div class="container mx-auto">
+                <div class="flex items-center justify-between my-5">
+                    <p class="font-semibold text-lg uppercase">Algunos productos</p>
+                    <span class="text-sm text-blue-600 cursor-pointer hover:underline" wire:click="goToCatalog()">Ver más</span>
+                </div>
+                <x-home.slider-product :products="$products" />
+            </div>
+        @endif
+
     </div>
 
 </div>
