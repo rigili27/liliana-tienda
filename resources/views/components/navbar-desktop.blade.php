@@ -2,12 +2,17 @@
 
     <div class="bg-white shadow-md dark:bg-neutral-800">
         <div class="container mx-auto flex items-center justify-between py-4 px-6">
-            <img class="inline-block .size-8 " src="/assets/images/logo.png" alt="La 27 ferretería">
-            {{-- <p>{{ $business->name }}</p> --}}
-            <div class="relative .w-full .max-w-lg w-[60%]">
+            <a href="{{ route('home') }}" class="me-9">
+                @php
+                    $business = App\Models\Business::first();
+                @endphp
+                <img class="inline-block .size-8 " src="{{ asset('storage') }}/{{ $business->desktop_logo_url }}" alt="La 27 ferretería">
+            </a>
+            <div class="relative .w-full .max-w-lg w-[50%]">
                 <div id="hs-combobox-basic-usage" class="relative" data-hs-combo-box="">
                     <div class="relative">
-                        <input wire:model.defer="temp_b" wire:keydown.enter="btnSearchEnter" class="py-3 ps-4 pe-9 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="¿Qué estás buscando?" type="text" role="combobox" aria-expanded="false" value="" data-hs-combo-box-input="">
+                        {{-- <input wire:model.defer="temp_b" wire:keydown.enter="btnSearchEnter" class="py-3 ps-4 pe-9 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="¿Qué estás buscando?" type="text" role="combobox" aria-expanded="false" value="" data-hs-combo-box-input=""> --}}
+                        <input wire:model.defer="temp_b" wire:keydown.enter="btnSearchEnter" class="py-3 ps-4 pe-9 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="¿Qué estás buscando?" type="text">
                         <div class="absolute top-1/2 end-3 -translate-y-1/2" aria-expanded="false" data-hs-combo-box-toggle=""></div>
                     </div>
                     <div class="absolute z-50 w-full max-h-72 p-1 bg-white border border-gray-200 rounded-lg overflow-hidden overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500 dark:bg-neutral-900 dark:border-neutral-700" style="display: none;" data-hs-combo-box-output="">
