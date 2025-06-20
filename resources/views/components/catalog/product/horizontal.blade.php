@@ -14,12 +14,12 @@
         </div>
         <div class="flex flex-wrap">
             <div class="p-4 flex flex-col h-full sm:p-7">
-                <p class="text-gray-500 dark:text-neutral-400">Código interno: {{ $product->id }} | SKU: {{ $product->sku }}</p>
-                <h3 class="text-lg font-bold text-gray-800 dark:text-white">{{ $product->name }}</h3>
+                <p class="text-gray-800 dark:text-neutral-400">Código interno: {{ $product->id }} | SKU: {{ $product->sku }}</p>
+                <h3 class="text-lg font-bold text-black dark:text-white">{{ $product->name }}</h3>
                 {{-- <h3 class="text-sm font-bold text-blue-800 dark:text-white">
                     <span>{{ $product->family->name }}</span><span class="mx-2">-</span><span>{{ $product->category->name }}</span>
                 </h3> --}}
-                <p class="m-1 mb-4 line-clamp-4 text-gray-500 dark:text-neutral-400">{!! $product->description !!}</p>
+                <p class="m-1 mb-4 line-clamp-4 text-gray-800 dark:text-neutral-400">{!! $product->description !!}</p>
                 <div class="mt-5 sm:mt-auto">
                     <p class="text-2xl font-bold text-black">
                         $ {{ number_format(round($product->choosePriceToUserPriceList($product)), 0, ',', '.') }}
@@ -43,7 +43,7 @@
                     @endif
 
                     <div class="mt-3">
-                        <p class="text-gray-500 text-sm dark:text-neutral-400">Actualizado el {{ $product->updated_at?->format('d/m/Y \a \l\a\s H:i') }}hs.</p>
+                        <p class="text-gray-700 text-sm dark:text-neutral-400">Actualizado el {{ $product->updated_at?->format('d/m/Y \a \l\a\s H:i') }}hs.</p>
                     </div>
 
                     {{-- <div>
