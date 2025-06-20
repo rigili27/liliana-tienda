@@ -12,9 +12,9 @@ use Illuminate\Support\Facades\Log;
 //     return view('welcome');
 // });
 
-Route::get('/home', Home::class)->name('home');
+Route::get('/', Home::class)->name('home');
 Route::get('/catalog', Catalog::class)->name('catalog');
-Route::get('/', Catalog::class)->name('catalog');
+// Route::get('/', Catalog::class)->name('catalog');
 Route::get('/show-product/{id}', ShowProduct::class)->name('show-product');
 
 Route::get('/optimize', function(Request $request){
