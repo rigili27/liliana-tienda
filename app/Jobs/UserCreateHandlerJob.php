@@ -69,7 +69,7 @@ class UserCreateHandlerJob implements ShouldQueue
                 // }
                 
                 // creo los usuarios
-                if ($filteredFields['cuit'] > 1)
+                if ($filteredFields['cuit'] > 1 && $filteredFields['password'] != '')
                     $filteredFields['email'] = $filteredFields['cuit'] . '@la27ferreteria.com.ar';
                 else
                     $filteredFields['email'] = $filteredFields['id'] . '@la27ferreteria.com.ar';
